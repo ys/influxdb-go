@@ -339,6 +339,12 @@ func (self *Client) Query(query string, precision ...TimePrecision) ([]*Series, 
 	return series, nil
 }
 
+func (self *Client) DeleteSerie(serieName string) error {
+	url := self.getUrlWithUserAndPass(fmt.Sprintf("/db/%s/series/%d", self.database, serieName), self.username, self.password)
+	resp, err := self.del(url)
+	return responseToError(resp, err, true)
+}
+
 func (self *Client) Ping() error {
 	url := self.getUrl("/ping")
 	resp, err := self.httpClient.Get(url)
