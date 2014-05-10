@@ -340,7 +340,7 @@ func (self *Client) Query(query string, precision ...TimePrecision) ([]*Series, 
 }
 
 func (self *Client) DeleteSerie(serieName string) error {
-	url := self.getUrlWithUserAndPass(fmt.Sprintf("/db/%s/series/%d", self.database, serieName), self.username, self.password)
+	url := self.getUrlWithUserAndPass(fmt.Sprintf("/db/%s/series/%s", self.database, serieName), self.username, self.password)
 	resp, err := self.del(url)
 	return responseToError(resp, err, true)
 }
